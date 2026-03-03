@@ -423,8 +423,8 @@ body {
     </div>
 
     <!-- ── Time Picker ─────────────────────────────────────── -->
-    <div id="time-picker-group" style="display:none; margin-bottom:20px">
-      <label class="input-label" for="time-input" style="text-align:center">Hora do registo</label>
+    <div id="time-picker-group" style="display:none; margin-bottom:20px; text-align:center">
+      <label class="input-label" for="time-input">Hora do registo</label>
       <input id="time-input" class="input-field" type="time" step="60"
              style="font-size:1.5rem;font-weight:600;text-align:center;letter-spacing:.08em">
       <div id="time-hint" style="font-size:.75rem;font-weight:300;color:var(--grey);text-align:center;margin-top:6px;min-height:1em"></div>
@@ -442,11 +442,13 @@ body {
     <div id="error-action" class="error-msg"></div>
 
     <button id="btn-checkin" class="btn btn-checkin" onclick="handleCheckin()" style="display:none">
-      &#9654; Registar Entrada
+      <svg width="13" height="13" viewBox="0 0 10 10" fill="currentColor" style="flex-shrink:0"><polygon points="0,0 10,5 0,10"/></svg>
+      Registar Entrada
     </button>
 
     <button id="btn-checkout" class="btn btn-checkout" onclick="handleCheckout()" style="display:none">
-      &#9646;&#9646; Registar Saída
+      <svg width="13" height="13" viewBox="0 0 10 10" fill="currentColor" style="flex-shrink:0"><rect x="0" y="0" width="3.5" height="10"/><rect x="6.5" y="0" width="3.5" height="10"/></svg>
+      Registar Saída
     </button>
 
     <button class="btn btn-ghost" onclick="goToPhone()">
@@ -657,7 +659,7 @@ function renderRecentEntries() {
     const cout = e.checkOut
       ? '<span style="color:var(--grey)"> \u2192 </span>' +
         new Date(e.checkOut).toLocaleTimeString('pt-PT', { hour: '2-digit', minute: '2-digit' })
-      : '<span style="color:var(--grey);font-style:italic"> em curso</span>';
+      : '';
 
     let badge = '';
     if (e.checkOut) {
@@ -665,6 +667,8 @@ function renderRecentEntries() {
       const h = Math.floor(mins / 60), m = mins % 60;
       const dur = h > 0 ? h + 'h' + (m > 0 ? ' ' + m + 'min' : '') : m + 'min';
       badge = '<span class="entry-duration">' + dur + '</span>';
+    } else {
+      badge = '<span class="entry-duration" style="color:var(--grey);background:var(--cream-dark);font-style:italic">aberto</span>';
     }
 
     const statusLabel = e.status || (e.state && e.state.name) || '';
