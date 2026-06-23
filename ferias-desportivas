@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Férias Desportivas de Verão — NAVE</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --green-dark: #1a2e1a;
+    --green-mid: #2d4a2d;
+    --green-accent: #4a7c4a;
+    --green-light: #7ab87a;
+    --cream: #f5f2ec;
+    --white: #ffffff;
+    --gold: #c8a84b;
+  }
+
+  body {
+    background: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .poster {
+    width: 600px;
+    background: var(--green-dark);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ── TOP PHOTO ZONE ── */
+  .photo-zone {
+    position: relative;
+    height: 260px;
+    background: linear-gradient(135deg, #2d4a2d 0%, #1a2e1a 100%);
+    overflow: hidden;
+  }
+
+  .photo-zone::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 70% 40%, rgba(74,124,74,0.3) 0%, transparent 60%),
+      radial-gradient(ellipse at 20% 80%, rgba(26,46,26,0.8) 0%, transparent 50%);
+    z-index: 1;
+  }
+
+  /* Court lines decoration */
+  .court-lines {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    opacity: 0.12;
+  }
+
+  .court-lines svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .photo-content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 40px 32px;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--green-light);
+    margin-bottom: 10px;
+  }
+
+  .main-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 72px;
+    line-height: 0.92;
+    color: var(--white);
+    letter-spacing: 0.02em;
+  }
+
+  .main-title em {
+    font-style: normal;
+    color: var(--green-light);
+  }
+
+  /* ── QUICK FACTS BAR ── */
+  .facts-bar {
+    background: var(--green-accent);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 40px;
+    gap: 8px;
+  }
+
+  .fact {
+    text-align: center;
+    flex: 1;
+  }
+
+  .fact-label {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    display: block;
+    margin-bottom: 3px;
+  }
+
+  .fact-value {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--white);
+  }
+
+  .fact-divider {
+    width: 1px;
+    height: 32px;
+    background: rgba(255,255,255,0.2);
+  }
+
+  /* ── BODY ── */
+  .body {
+    padding: 36px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  /* PRICING */
+  .section-label {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--green-light);
+    margin-bottom: 14px;
+  }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
+
+  .price-card {
+    background: var(--green-mid);
+    border-radius: 8px;
+    padding: 16px 14px;
+    position: relative;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .price-card.featured {
+    background: var(--green-accent);
+    border-color: var(--green-light);
+  }
+
+  .price-card.featured::before {
+    content: 'MELHOR VALOR';
+    position: absolute;
+    top: -9px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--gold);
+    color: var(--green-dark);
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    padding: 3px 8px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  .price-type {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .price-amount {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 40px;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .price-amount sup {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    vertical-align: super;
+    line-height: 0;
+  }
+
+  .price-note {
+    font-size: 10px;
+    color: rgba(255,255,255,0.45);
+    margin-top: 4px;
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: rgba(255,255,255,0.08);
+  }
+
+  /* INCLUDES */
+  .includes-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .include-pill {
+    background: var(--green-mid);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 7px 14px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.8);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .include-pill .icon {
+    font-size: 14px;
+  }
+
+  /* DISCOUNTS */
+  .discount-row {
+    display: flex;
+    gap: 10px;
+  }
+
+  .discount-card {
+    flex: 1;
+    background: rgba(200,168,75,0.1);
+    border: 1px solid rgba(200,168,75,0.25);
+    border-radius: 8px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .discount-pct {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    color: var(--gold);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .discount-desc {
+    font-size: 11.5px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.45;
+  }
+
+  .discount-note {
+    font-size: 9px;
+    color: rgba(255,255,255,0.35);
+    margin-top: 2px;
+    display: block;
+  }
+
+  /* ── CTA FOOTER ── */
+  .cta-footer {
+    background: var(--cream);
+    padding: 24px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .cta-left {
+    flex: 1;
+  }
+
+  .cta-headline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: var(--green-dark);
+    letter-spacing: 0.04em;
+    line-height: 1.1;
+    margin-bottom: 6px;
+  }
+
+  .cta-deadline {
+    font-size: 11px;
+    color: #5a5a5a;
+    line-height: 1.4;
+  }
+
+  .cta-deadline strong {
+    color: var(--green-dark);
+  }
+
+  .cta-contacts {
+    text-align: right;
+  }
+
+  .contact-item {
+    font-size: 12px;
+    color: var(--green-dark);
+    font-weight: 500;
+    display: block;
+    line-height: 1.8;
+  }
+
+  /* ── BRAND BAR ── */
+  .brand-bar {
+    background: var(--green-dark);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 12px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .brand-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: var(--white);
+    letter-spacing: 0.12em;
+  }
+
+  .brand-sub {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+  }
+
+  .brand-tag {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--green-light);
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<div class="poster">
+
+  <!-- TOP PHOTO ZONE -->
+  <div class="photo-zone">
+    <div class="court-lines">
+      <svg viewBox="0 0 600 260" preserveAspectRatio="none">
+        <!-- Court outline -->
+        <rect x="60" y="30" width="480" height="210" fill="none" stroke="white" stroke-width="1.5"/>
+        <!-- Center line -->
+        <line x1="300" y1="30" x2="300" y2="240" stroke="white" stroke-width="1"/>
+        <!-- Service boxes -->
+        <line x1="60" y1="135" x2="540" y2="135" stroke="white" stroke-width="1"/>
+        <!-- Net line -->
+        <line x1="300" y1="80" x2="300" y2="190" stroke="white" stroke-width="2.5"/>
+        <!-- Diagonals -->
+        <line x1="60" y1="30" x2="300" y2="135" stroke="white" stroke-width="0.7"/>
+        <line x1="540" y1="30" x2="300" y2="135" stroke="white" stroke-width="0.7"/>
+      </svg>
+    </div>
+
+    <div class="photo-content">
+      <div class="eyebrow">NAVE Academy — Verão 2026</div>
+      <div class="main-title">
+        Férias<br>
+        <em>Desportivas</em><br>
+        de Verão
+      </div>
+    </div>
+  </div>
+
+  <!-- FACTS BAR -->
+  <div class="facts-bar">
+    <div class="fact">
+      <span class="fact-label">Quando</span>
+      <span class="fact-value">Julho & Agosto</span>
+    </div>
+    <div class="fact-divider"></div>
+    <div class="fact">
+      <span class="fact-label">Horário</span>
+      <span class="fact-value">9h – 18h</span>
+    </div>
+    <div class="fact-divider"></div>
+    <div class="fact">
+      <span class="fact-label">Dias</span>
+      <span class="fact-value">2ª a 6ª feira</span>
+    </div>
+    <div class="fact-divider"></div>
+    <div class="fact">
+      <span class="fact-label">Idades</span>
+      <span class="fact-value">6 – 16 anos</span>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <!-- PRICING -->
+    <div>
+      <div class="section-label">Preços</div>
+      <div class="pricing-grid">
+        <div class="price-card">
+          <span class="price-type">Diário</span>
+          <div class="price-amount"><sup>€</sup>50</div>
+          <div class="price-note">por dia</div>
+        </div>
+        <div class="price-card">
+          <span class="price-type">Semanal</span>
+          <div class="price-amount"><sup>€</sup>189</div>
+          <div class="price-note">por semana</div>
+        </div>
+        <div class="price-card featured">
+          <span class="price-type">2 Semanas</span>
+          <div class="price-amount"><sup>€</sup>299</div>
+          <div class="price-note">poupa €79</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- INCLUDES -->
+    <div>
+      <div class="section-label">Incluído</div>
+      <div class="includes-row">
+        <div class="include-pill"><span class="icon">🥗</span> Almoço</div>
+        <div class="include-pill"><span class="icon">🍎</span> Lanches</div>
+        <div class="include-pill"><span class="icon">🎾</span> Padel & Pickleball</div>
+        <div class="include-pill"><span class="icon">👟</span> Atividades desportivas</div>
+        <div class="include-pill"><span class="icon">🎨</span> Atividades lúdicas</div>
+        <div class="include-pill"><span class="icon">🌳</span> Atividades no exterior</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- DISCOUNTS -->
+    <div>
+      <div class="section-label">Descontos</div>
+      <div class="discount-row">
+        <div class="discount-card">
+          <div class="discount-pct">5%</div>
+          <div>
+            <div class="discount-desc">Desconto irmãos</div>
+            <span class="discount-note">não acumulável</span>
+          </div>
+        </div>
+        <div class="discount-card">
+          <div class="discount-pct">10%</div>
+          <div>
+            <div class="discount-desc">Alunos ou pais que frequentam a Academia</div>
+            <span class="discount-note">não acumulável</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CTA FOOTER -->
+  <div class="cta-footer">
+    <div class="cta-left">
+      <div class="cta-headline">Inscreve-te agora</div>
+      <div class="cta-deadline">
+        Inscrições até <strong>8 dias antes</strong> da semana pretendida.
+      </div>
+    </div>
+    <div class="cta-contacts">
+      <span class="contact-item">+351 910 574 176</span>
+      <span class="contact-item">clientes@navepadel.com</span>
+    </div>
+  </div>
+
+  <!-- BRAND BAR -->
+  <div class="brand-bar">
+    <div>
+      <div class="brand-name">NAVE</div>
+      <div class="brand-sub">Padel × Pickleball Academy</div>
+    </div>
+    <div class="brand-tag">Lisboa</div>
+  </div>
+
+</div>
+
+</body>
+</html>
